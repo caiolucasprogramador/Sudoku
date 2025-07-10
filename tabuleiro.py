@@ -4,6 +4,22 @@ tabuleiro = [[0 for i in range(9)] for i in range(9)]
 for lin,col,val in dicast:      #loop pra preencher o tabuleiro
     tabuleiro[lin][col] = val 
 
+#função que verifica se nas dicas tem um mesmo número em uma mesma linha
+def validacao_linha(dicastratadas):
+    valido = True
+    nova_lista = [(tupla[0], tupla[2]) for tupla in dicastratadas]
+    if len(nova_lista) != len(set(nova_lista)):
+        valido = False
+    return valido
+
+#função que verifica se nas dicas tem um mesmo número em uma mesma coluna
+def validacao_coluna(dicastratadas):
+    valido = True
+    lista_nova = [(tupla[1], tupla[2]) for tupla in dicastratadas]
+    if len(lista_nova) != len(set(lista_nova)):
+        valido = False
+    return valido
+
 #funçao pra imprimir o tabuleiro bonitinho
 def printar_tabuleiro(tab):
     for i in range(9):
@@ -23,5 +39,8 @@ def printar_tabuleiro(tab):
         
         print(linhaf)
 
-
-printar_tabuleiro(tabuleiro)
+#printa o tabuleiro somente se as dicas tiverem sem erros
+if validacao_linha(dicast) == True and validacao_coluna(dicast) == True:
+    printar_tabuleiro(tabuleiro)
+else:
+    print('AS DICAS CONTÉM NUMEROS REPETIDOS NA MESMA LINHA OU COLUNA!')
