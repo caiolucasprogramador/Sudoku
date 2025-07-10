@@ -6,19 +6,17 @@ for lin,col,val in dicast:      #loop pra preencher o tabuleiro
 
 #função que verifica se nas dicas tem um mesmo número em uma mesma linha
 def validacao_linha(dicastratadas):
-    valido = True
     nova_lista = [(tupla[0], tupla[2]) for tupla in dicastratadas]
     if len(nova_lista) != len(set(nova_lista)):
-        valido = False
-    return valido
+        return False
+    return True
 
 #função que verifica se nas dicas tem um mesmo número em uma mesma coluna
 def validacao_coluna(dicastratadas):
-    valido = True
     lista_nova = [(tupla[1], tupla[2]) for tupla in dicastratadas]
     if len(lista_nova) != len(set(lista_nova)):
-        valido = False
-    return valido
+        return False
+    return True
 
 #funçao pra imprimir o tabuleiro bonitinho
 def printar_tabuleiro(tab):
