@@ -18,6 +18,40 @@ def validacao_coluna(dicastratadas):
         return False
     return True
 
+#função que verifica se há somente um número de valor único em cada bloco 3x3
+def validacao_bloco(lin, col):
+    linha_base = 0
+    coluna_base = 0
+    bloco = []
+    if lin <= 2:
+        linha_base = 0
+    elif lin <= 5:
+        linha_base = 3
+    else:
+        linha_base = 6
+
+    if col <= 2:
+        coluna_base = 0
+    elif col <= 5:
+        coluna_base = 3
+    else:
+        coluna_base = 6
+    for i in range(linha_base, linha_base + 3):
+        for j in range(coluna_base, coluna_base + 3):
+            if tabuleiro[i][j] != 0 and tabuleiro[i][j] in bloco:
+                return True #tem repetido
+            bloco.append(tabuleiro[i][j])
+        return False #nao tem repetido
+
+erro_de_bloco = False
+for i in range(9):
+    for j in range(9):
+        if validacao_bloco(i,j) == True:
+            erro_de_bloco = True
+
+
+
+
 #funçao pra imprimir o tabuleiro bonitinho
 def printar_tabuleiro(tab):
     for i in range(9):
@@ -37,8 +71,13 @@ def printar_tabuleiro(tab):
         
         print(linhaf)
 
+
 #printa o tabuleiro somente se as dicas tiverem sem erros
 if validacao_linha(dicast) == True and validacao_coluna(dicast) == True:
     printar_tabuleiro(tabuleiro)
+    
+elif erro_de_bloco == True:
+    print('AS DICAS CONTÉM NÚMEROS REPETIDOS NO MESMO BLOCO')
+
 else:
-    print('AS DICAS CONTÉM NUMEROS REPETIDOS NA MESMA LINHA OU COLUNA!')
+    print('AS DICAS CONTÉM NÚMEROS REPETIDOS NA MESMA LINHA OU COLUNA!')
