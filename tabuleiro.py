@@ -41,7 +41,7 @@ def validacao_bloco(lin, col):
             if tabuleiro[i][j] != 0 and tabuleiro[i][j] in bloco:
                 return True #tem repetido
             bloco.append(tabuleiro[i][j])
-        return False #nao tem repetido
+    return False #nao tem repetido
 
 erro_de_bloco = False
 for i in range(9):
@@ -73,7 +73,7 @@ def printar_tabuleiro(tab):
 
 
 #printa o tabuleiro somente se as dicas tiverem sem erros
-if validacao_linha(dicast) == True and validacao_coluna(dicast) == True:
+if validacao_linha(dicast) == True and validacao_coluna(dicast) == True and erro_de_bloco == False:
     printar_tabuleiro(tabuleiro)
     
 elif erro_de_bloco == True:
