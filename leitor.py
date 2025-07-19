@@ -28,10 +28,16 @@ def tratar_entrada(linha):
     lin = int(num)-1
     val = int(valor.strip())
 
+
+    entradasvalidas = [0,1,2,3,4,5,6,7,8]
+    if col not in entradasvalidas or lin not in entradasvalidas: 
+        print('\033[31m ENTRADA INVALIDA!!! \033[m')
+        exit()
+    
     return lin,col,val
 
 #cria a lista com dicas(nao tratadas)
-dicas = ler_dicas('testando.txt')
+dicas = ler_dicas('Sudoku/testando.txt')
 
 #preenche a lista corretamente, com os valores tratados
 dicast = []

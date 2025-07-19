@@ -1,2 +1,3 @@
-from leitor import dicast
-print(dicast)
+import sys 
+import leitor 
+import tabuleiro
