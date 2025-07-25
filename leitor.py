@@ -9,32 +9,39 @@ def ler_dicas(arquivodicas):
 
 #trata os erros de usuario, e transforma em uma tupla para preencher o tabuleiro, item por item da lista.
 def tratar_entrada(linha):
+    try:
 
-    linha = linha.replace(' ','')
-    linha = linha.replace('=', ':')
-    linha = linha.upper()
-    
-    if ':' in linha and not linha.split(':')[1].startswith(' '):
-        linha = linha.replace(':', ': ')
-    
-    if ':' not in linha:
+        linha = linha.replace(' ','')
+        linha = linha.replace('=', ':')
+        linha = linha.upper()
+        
+        if ':' in linha and not linha.split(':')[1].startswith(' '):
+            linha = linha.replace(':', ': ')
+        
+        if ':' not in linha:
+            return None
+
+        parte1,valor = linha.split(':')
+        letra,num = parte1.split(',')
+        
+        valcol = {'A' : 0, 'B' : 1, 'C' : 2 , 'D' : 3, 'E' : 4 , 'F' : 5 , 'G' : 6, 'H' : 7, 'I' : 8}
+        
+        if letra not in valcol:
+            return None
+
+        col = valcol[letra]
+        lin = int(num)-1
+        val = int(valor.strip())
+
+
+        entradasvalidas = [0,1,2,3,4,5,6,7,8]
+        if col not in entradasvalidas or lin not in entradasvalidas: 
+            print('\033[31m ENTRADA INVALIDA!!! \033[m')
+            exit()
+        
+        return lin,col,val
+    except:
         return None
-
-    parte1,valor = linha.split(':')
-    
-
-    letra,num = parte1.split(',')
-    col = ord(letra) - ord('A')
-    lin = int(num)-1
-    val = int(valor.strip())
-
-
-    entradasvalidas = [0,1,2,3,4,5,6,7,8]
-    if col not in entradasvalidas or lin not in entradasvalidas: 
-        print('\033[31m ENTRADA INVALIDA!!! \033[m')
-        exit()
-    
-    return lin,col,val
 
 #cria a lista com dicas(nao tratadas)
 dicas = ler_dicas('Sudoku/testando.txt')
@@ -44,6 +51,8 @@ dicast = []
 for e in dicas:
     if tratar_entrada(e) is not None:
         dicast.append(tratar_entrada(e))
+
+
 
 
 

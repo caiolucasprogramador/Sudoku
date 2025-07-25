@@ -1,10 +1,11 @@
 #funçao pra imprimir o tabuleiro bonitinho
 def printar_tabuleiro(tab,tabcomdicas):
+    print("  | A  B  C  | D  E  F   | G  H  I")
     for i in range(9):
         if i % 3 == 0 and i != 0:
-            print('-' * 32)  # linha horizontal a cada 3 linhas
+            print('-' * 35,)  # linha horizontal a cada 3 linhas
 
-        linhaf = ''
+        linhaf = f'{i+1} |'
         for j in range(9):
             if j % 3 == 0 and j != 0:
                 linhaf += ' | ' #linha vertical a cada 3 colunas

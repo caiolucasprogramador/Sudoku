@@ -5,19 +5,19 @@ from sys import exit
 
 nome_dicas = input('Digite o caminho do arquivo de dicas: ')
 
-dicas = ler_dicas(nome_dicas) #lista das linhas do txt 
+dicas = ler_dicas('sudoku/testando.txt') #lista das linhas do txt 
 
-dicast = [] #lista com as linhas do txt tratadas e transformadas em tuplas() 
+dicast = [] 
 for e in dicas:
     if tratar_entrada(e) is not None:
-        dicast.append(tratar_entrada(e))
+        dicast.append(tratar_entrada(e))#loop para preencher a lista com as linhas tratadas e transformadas em tuplas
 
 if len(dicast) < 1 or len(dicast) > 80: #checa se a quantidade de dicas é válida
     print('Número de pistas inválido.')
     exit()
 
-tabuleiro = [[0 for _ in range(9)] for _ in range(9)] #tabuleiro (matriz 9x9)
-for lin, col, val in dicast:
+tabuleiro = [[0 for _ in range(9)] for _ in range(9)] #inicializa o tabuleiro (matriz 9x9)
+for lin, col, val in dicast:#loop para preencher o tabuleiro
     tabuleiro[lin][col] = val
 tab_dicas = [linha[:] for linha in tabuleiro] #cópia do tabuleiro original preenchido apenas com as dicas
 
@@ -48,15 +48,22 @@ def tratar_jogada(linha): #funçao que trata as jogadas do usuário e as transfo
             return None
         
         parte1, valor = linha.split(':')
-
-
         letra, num = parte1.split(',')
-        col = ord(letra) - ord('A')
+
+        valcol = {'A' : 0, 'B' : 1, 'C' : 2 , 'D' : 3, 'E' : 4 , 'F' : 5 , 'G' : 6, 'H' : 7, 'I' : 8}
+
+        if letra not in valcol:
+            return None
+
+        col = valcol[letra]
         lin = int(num) - 1
         val = int(valor.strip())
 
         jogadas_validas = [0,1,2,3,4,5,6,7,8]
-        if col not in jogadas_validas or lin not in jogadas_validas:
+        valores_validos = [1,2,3,4,5,6,7,8,9]
+        
+
+        if col not in jogadas_validas or lin not in jogadas_validas or val not in valores_validos:
             return None
         
         return lin,col,val
@@ -67,11 +74,11 @@ def tratar_jogada(linha): #funçao que trata as jogadas do usuário e as transfo
 jogo_ativo = True
 print('\nDigite sua jogada no formato COL,LIN: VALOR')
 while jogo_ativo:                                      #loop para realizar e validar as jogadas
-    jogada = input('Jogada: ').strip()
+    jogada = input('Jogada: ').strip().upper()
     resultado = tratar_jogada(jogada)
 
     if resultado is not None: 
-        lin,col,val = resultado
+        lin,col,val = resultado #desempacota a tupla 
 
         if tab_dicas[lin][col] != 0:
             print('Essa posiçao contém uma dica e nao pode ser alterada.')
@@ -82,13 +89,13 @@ while jogo_ativo:                                      #loop para realizar e val
 
             if sobr == 'S':
                 tabuleiro[lin][col] = val
-                if not validacao_linhai(tabuleiro, lin, col) or not validacao_colunai(tabuleiro, lin, col) or not validacao_blocoi(tabuleiro, lin, col):
+                if not validacao_linhai(tabuleiro,lin,col) or not validacao_colunai(tabuleiro, lin, col) or not validacao_blocoi(tabuleiro, lin, col):
                     print('jogada inválida: essa jogada fere as regras do sudoku, jogue novamente: ')
                     tabuleiro[lin][col] = 0
                 else:
                     printar_tabuleiro(tabuleiro,tab_dicas)
                     if tabuleiro_completo(tabuleiro):
-                        print('Sudoku completado!')
+                        print('\033[32mSudoku completado!\033[m')
                         jogo_ativo = False
             else:
                 print('Jogada cancelada')
@@ -100,7 +107,56 @@ while jogo_ativo:                                      #loop para realizar e val
             else:
                 printar_tabuleiro(tabuleiro,tab_dicas)
                 if tabuleiro_completo(tabuleiro):
-                        print('Sudoku completado!')
+                        print('\033[32mSudoku completado!\033[m')
                         jogo_ativo = False
+
+    elif jogada.startswith('?'): #mostrar as possibilidades de jogada
+       
+        resto = jogada[1:]
+        letra,num = resto.split(',')
+
+        valcol = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, 'I': 8}
+        vallin = [1,2,3,4,5,6,7,8,9]
+            
+        if letra in valcol and int(num) in vallin:
+            col = valcol[letra]
+            lin = int(num) - 1
+
+            if tabuleiro[lin][col] != 0:
+                    print('essa celula ja esta preenchida.')
+            else:
+                possibilidades = []
+                for i in range (1,10):
+                    tabuleiro[lin][col] = i
+                    if validacao_linhai(tabuleiro,lin,col) and validacao_blocoi(tabuleiro,lin,col) and validacao_colunai(tabuleiro,lin,col):
+                        possibilidades.append(i)
+                    tabuleiro[lin][col] = 0
+                print(f'Valores válidos para a célula {letra}, {num}: {possibilidades}')
+        else:
+            print('Comando de ajuda mal formatado')
+
+    elif jogada .startswith('!'): #excluir uma jogada
+ 
+        resto = jogada[1:]
+        letra,num = resto.split(',')
+
+        valcol = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7, 'I': 8}
+        vallin = [1,2,3,4,5,6,7,8,9]
+
+        if letra in valcol and int(num) in vallin:
+            col = valcol[letra]
+            lin = int(num) - 1
+
+            if tabuleiro[lin][col] == 0:
+                    print('Essa célula já está vazia')
+            elif tab_dicas[lin][col] != 0:
+                    print('Não é possível apagar uma dica')
+            else:
+                tabuleiro[lin][col] = 0
+                print(f'A celula {letra}, {num} foi apagada')
+                printar_tabuleiro(tabuleiro,tab_dicas)
+        else:
+            print('Comando de remoçao mal formatado')
+                        
     else:
         print('Essa jogada é inválida, tente novamente.') #se a funçao de tratar jogada der None, pede outra jogada 
