@@ -1,5 +1,5 @@
-from tabuleiro import tabuleiro, printar_tabuleiro, tabuleiro_valido
-
+from tabuleiro import criar_tabuleiro, printar_tabuleiro
+from validadores import tabuleiro_valido
 
 # Encontra a próxima posição vazia
 def espacos_vazios(tab):
@@ -52,15 +52,16 @@ def solucionador_completo(tab):
 
     return False
 
+def modo_solucionador(dicast):
+    tabuleiro = criar_tabuleiro(dicast)
 
-if __name__ == "__main__":
-    if tabuleiro_valido:
+    if tabuleiro_valido(tabuleiro, dicast):
         print("Tabuleiro original:")
-        printar_tabuleiro(tabuleiro)
+        printar_tabuleiro(tabuleiro, [[0]*9 for _ in range(9)])
 
         if solucionador_completo(tabuleiro):
             print("\nTabuleiro resolvido:")
-            printar_tabuleiro(tabuleiro)
+            printar_tabuleiro(tabuleiro, [[0]*9 for _ in range(9)])
         else:
             print("\nNão foi possível resolver o tabuleiro.")
     else:

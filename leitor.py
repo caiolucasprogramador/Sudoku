@@ -30,14 +30,4 @@ def tratar_entrada(linha):
 
     return lin,col,val
 
-#cria a lista com dicas(nao tratadas)
-dicas = ler_dicas('testando.txt')
-
-#preenche a lista corretamente, com os valores tratados
-dicast = []
-for e in dicas:
-    if tratar_entrada(e) is not None:
-        dicast.append(tratar_entrada(e))
-
-
 
