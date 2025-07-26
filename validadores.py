@@ -45,6 +45,15 @@ def tabuleiro_completo(tabuleiro): #funçao que verifica se o tabuleiro esta com
             return False
     return True
 
+def tabuleiro_valido(tabuleiro, dicas):
+    if not validacao_linha(dicas) or not validacao_coluna(dicas):
+        return False
+
+    for i in range(9):
+        for j in range(9):
+            if validacao_bloco(tabuleiro, i, j):
+                return False  # tem repetição
+    return True
 
 
 #validacao linha e coluna do modo interativo

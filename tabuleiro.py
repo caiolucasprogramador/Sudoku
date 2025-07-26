@@ -1,3 +1,8 @@
+def criar_tabuleiro(dicast):
+    tabuleiro = [[0 for _ in range(9)] for _ in range(9)]
+    for lin, col, val in dicast:
+        tabuleiro[lin][col] = val
+    return tabuleiro
 #funçao pra imprimir o tabuleiro bonitinho
 def printar_tabuleiro(tab,tabcomdicas):
     print("  | A  B  C  | D  E  F   | G  H  I")
