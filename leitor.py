@@ -1,7 +1,7 @@
 #cria uma lista linha por linha do arquivo de dicas
-def ler_dicas(arquivodicas):
+def ler_dicas(testando):
 
-    with open(arquivodicas, "r", encoding="utf-8") as texto:
+    with open(testando, "r", encoding="utf-8") as texto:
         linhas = [dica.strip() for dica in texto.readlines()]
 
     return linhas
@@ -44,7 +44,7 @@ def tratar_entrada(linha):
         return None
 
 #cria a lista com dicas(nao tratadas)
-dicas = ler_dicas('Sudoku/testando.txt')
+dicas = ler_dicas('testando.txt')
 
 #preenche a lista corretamente, com os valores tratados
 dicast = []

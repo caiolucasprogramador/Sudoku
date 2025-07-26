@@ -5,7 +5,7 @@ from sys import exit
 
 nome_dicas = input('Digite o caminho do arquivo de dicas: ')
 
-dicas = ler_dicas('sudoku/testando.txt') #lista das linhas do txt 
+dicas = ler_dicas(nome_dicas) #lista das linhas do txt
 
 dicast = [] 
 for e in dicas:
