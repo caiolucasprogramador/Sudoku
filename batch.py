@@ -55,23 +55,21 @@ def modo_batch():
 
     for linha in linhas_batch:
         jogada = tratar_entrada(linha)
-        if jogada is None:
-            continue
 
-        lin, col, val = jogada
+        if jogada is not None:
+            lin, col, val = jogada
 
-        if tab_dicas[lin][col] != 0:
-            print(f"Jogada ignorada na linha {lin + 1}, coluna {colunas[col + 1]}: posição já preenchida pelas dicas.")
-            continue
-
-        valor_correto = tabuleiro_resolvido[lin][col]
-        if val != valor_correto:
-            print(f"Jogada ERRADA na linha {lin + 1}, coluna {colunas[col + 1]}: esperava {valor_correto}, recebeu {val}.")
-            continue
-
-        tabuleiro[lin][col] = val
-        jogadast.append((lin, col, val))
-        print(f"Jogada correta inserida em ({lin + 1}, {colunas[col + 1]}): {val}")
+            if tab_dicas[lin][col] != 0:
+                print(f"Jogada ignorada na linha {lin + 1}, coluna {colunas[col + 1]}: posição já preenchida pelas dicas.")
+            elif val != tabuleiro_resolvido[lin][col]:
+                valor_correto = tabuleiro_resolvido[lin][col]
+                print(f"Jogada ERRADA na linha {lin + 1}, coluna {colunas[col + 1]}: esperava {valor_correto}, recebeu {val}.")
+            else:
+                tabuleiro[lin][col] = val
+                jogadast.append((lin, col, val))
+                print(f"Jogada correta inserida em ({lin + 1}, {colunas[col + 1]}): {val}")
+        else:
+            print("Jogada inválida ignorada.")
 
     print("\nTabuleiro após aplicação das jogadas válidas:")
     printar_tabuleiro(tabuleiro, tab_dicas)

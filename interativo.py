@@ -103,12 +103,10 @@ def processar_jogada(tabuleiro, tab_dicas, lin, col, val):
 
     if tabuleiro[lin][col] != 0:
         print('Essa posiçao ja esta preenchida')
-        while True:
+        sobr = input('Deseja sobrescrever o valor?\nS para sobrescrever\nN para manter como está: \n').strip().upper()
+        while sobr not in ('S', 'N'):
+            print('Resposta inválida, digite S ou N.')
             sobr = input('Deseja sobrescrever o valor?\nS para sobrescrever\nN para manter como está: \n').strip().upper()
-            if sobr in ('S', 'N'):
-                break
-            else:
-                print('Resposta inválida, digite S ou N.')
 
         if sobr == 'S':
             tabuleiro[lin][col] = val
@@ -116,6 +114,7 @@ def processar_jogada(tabuleiro, tab_dicas, lin, col, val):
                 print('jogada inválida: essa jogada fere as regras do sudoku, jogue novamente: ')
                 tabuleiro[lin][col] = 0
                 return False
+
             else:
                 printar_tabuleiro(tabuleiro, tab_dicas)
                 if tabuleiro_completo(tabuleiro):

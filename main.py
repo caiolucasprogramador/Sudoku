@@ -16,7 +16,8 @@ def carregar_dicas():
 
 
 def main():
-    while True:
+    executando = True
+    while executando:
         print("\nEscolha o modo:")
         print("1 - Modo Interativo (jogar manualmente)")
         print("2 - Modo Solucionador (resolver automaticamente)")
@@ -34,9 +35,10 @@ def main():
             modo_batch()
         elif escolha == '0':
             print("Saindo...")
-            break
+            executando = False
         else:
             print("Opção inválida, tente novamente.")
+
 
 if __name__ == "__main__":
     main()
