@@ -1,3 +1,6 @@
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
 from interativo import modo_interativo
 from solucionador import modo_solucionador 
 from batch import modo_batch

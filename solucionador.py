@@ -1,3 +1,6 @@
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
 from tabuleiro import criar_tabuleiro, printar_tabuleiro
 from validadores import tabuleiro_valido
 

@@ -1,3 +1,6 @@
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
 #funcoes validadoras para montar o tabuleiro com as dicas iniciais
 def validacao_linha(dicastratadas):
     nova_lista = [(tupla[0], tupla[2]) for tupla in dicastratadas]

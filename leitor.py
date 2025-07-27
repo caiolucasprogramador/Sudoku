@@ -1,3 +1,6 @@
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
 #cria uma lista linha por linha do arquivo de dicas
 def ler_dicas(arquivodicas):
 

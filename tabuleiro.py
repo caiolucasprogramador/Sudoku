@@ -1,4 +1,6 @@
-
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
 def criar_tabuleiro(dicast):
     tabuleiro = [[0 for _ in range(9)] for _ in range(9)]
     for lin, col, val in dicast:
