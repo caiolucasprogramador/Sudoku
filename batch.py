@@ -1,3 +1,7 @@
+#Caio Lucas de Oliveira Ribeiro - 582128
+#Davi Freitas Norões Ellery - 579444
+#Daniel Ítalo Sousa Alves - 579858
+
 from leitor import ler_dicas, tratar_entrada
 from validadores import validacao_linha, validacao_coluna, validacao_bloco
 from tabuleiro import printar_tabuleiro
